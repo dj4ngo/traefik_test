@@ -12,6 +12,8 @@ $ git clone https://github.com/dj4ngo/traefik_test.git
 $ cd traefik_test
 ```
 
+Add www.mydomain.com to localhost in  /etc/hosts
+
 ### 1. Run traefik
 
 We will run traefik only
@@ -29,7 +31,9 @@ Then we run only one web server, and test it using curl.
 ```console
 $ docker-compose up -d nginx
 ```
-=> Test it : curl -H Host:nginx.docker.localhost http://127.0.0.1:8081
+=> Test it : curl -H Host:www.mydomain.com http://127.0.0.1:8081
+
+=> Final adress : http://www.mydomain.com:8081/
 
 ### 3. Scale servers
 

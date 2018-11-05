@@ -4,15 +4,18 @@ services:
 
   traefik:
     image: traefik
-    command: --api --docker  # Enables the web UI and tells Traefik to listen to docker
+    command: --api --docker  # Enable web UI and tells Traefik to listen to docker
     ports:
       - "8081:80"    # HTTP port
       - "8082:8080"  # Web UI (enabled by --api)
     volumes:
-      - /var/run/docker.sock:/var/run/docker.sock
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "$PWD/traefik.toml:/traefik.toml"
 
  
   nginx:
     build: nginx
     labels:
-      - "traefik.frontend.rule=Host:nginx.docker.localhost"
+      - "traefik.port=80"
+      - "traefik.backend=HelloWorld"
+      - "traefik.frontend.rule=Host:www.mydomain.com"
